@@ -1,1 +1,1 @@
-# react-crypto-project
+React Crypto Project
