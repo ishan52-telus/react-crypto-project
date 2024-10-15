@@ -14,13 +14,10 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  function handleFavCrypto(selectedCrypto: SavedCrypto) {
+  function handleFavCrypto(selectedCrypto: SavedCrypto, isSaved: boolean) {
     setFavCryptos((prevFavCryptos) => {
-      const exists = prevFavCryptos.find(
-        (crypto) => crypto.id === selectedCrypto.id
-      );
       let updatedFavCryptos;
-      if (exists) {
+      if (isSaved) {
         updatedFavCryptos = prevFavCryptos.filter(
           (crypto) => crypto.id !== selectedCrypto.id
         );
@@ -31,6 +28,7 @@ const App: React.FC = () => {
       return updatedFavCryptos;
     });
   }
+  console.log("3", handleFavCrypto);
 
   return (
     <QueryClientProvider client={queryClient}>

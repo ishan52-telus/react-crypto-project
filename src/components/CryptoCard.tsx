@@ -1,5 +1,6 @@
 import React from "react";
 import "./CryptoCard.css";
+import SavedCryptoInfo from "../models/SavedCrypto";
 
 type Price = {
   currency: string;
@@ -11,7 +12,7 @@ type CryptoCardProps = {
   coinName: string;
   prices: Price[];
   isSaved: boolean;
-  onToggleSave: (coin: { id: string; name: string }) => void;
+  onToggleSave: (coin: SavedCryptoInfo, isSaved: boolean) => void;
 };
 
 const CryptoCard: React.FC<CryptoCardProps> = ({
@@ -27,7 +28,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({
         <h3>{coinName}</h3>
         <span
           className={`fa fa-star fa-lg ${isSaved ? "unstar" : "star"}`}
-          onClick={() => onToggleSave({ id: coinId, name: coinName })}
+          onClick={() => onToggleSave({ id: coinId, name: coinName }, isSaved)}
         ></span>
       </div>
       <div className="crypto-card-data">

@@ -5,18 +5,18 @@ import "./CryptoFinder.css";
 import fetchCryptoData from "../apiclients/crypto.api";
 import fetchCryptoList from "../apiclients/cryptolist.api";
 import CryptoList from "../models/CryptoList";
-import CryptoInfo from "../models/CryptoInfo";
+import SavedCryptoInfo from "../models/SavedCrypto";
 
 const CryptoFinder: React.FC<{
-  onSelectCrypto: (crypto: CryptoInfo) => void;
-  favCryptos: CryptoInfo[];
+  onSelectCrypto: (crypto: SavedCryptoInfo, isSaved: boolean) => void;
+  favCryptos: SavedCryptoInfo[];
 }> = (props) => {
-  const [selectedCoin, setSelectedCoin] = useState<CryptoInfo>({
+  const [selectedCoin, setSelectedCoin] = useState<SavedCryptoInfo>({
     id: "",
     name: "",
   });
 
-  const [queryCoin, setQueryCoin] = useState<CryptoInfo>({
+  const [queryCoin, setQueryCoin] = useState<SavedCryptoInfo>({
     id: "",
     name: "",
   });
@@ -96,9 +96,7 @@ const CryptoFinder: React.FC<{
                 { currency: "gbp", value: data.gbp },
               ]}
               isSaved={props.favCryptos.some((c) => c.id === queryCoin.id)}
-              onToggleSave={() =>
-                props.onSelectCrypto({ id: queryCoin.id, name: queryCoin.name })
-              }
+              onToggleSave={props.onSelectCrypto}
             />
           )}
           {!data && <p>Your results will be shown here</p>}

@@ -1,7 +1,6 @@
-type SavedCrypto = {
-    id: string;
-    name: string;
-  };
+type SavedCryptoInfo = {
+  id: string;
+  name: string;
+};
 
-  export default SavedCrypto;
-  
+export default SavedCryptoInfo;

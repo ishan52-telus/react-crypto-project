@@ -1,17 +1,17 @@
 import React, { useState, useMemo } from "react";
 import CryptoCard from "./CryptoCard";
 import { useQueries } from "@tanstack/react-query";
-import SavedCrypto from "../models/SavedCrypto";
+import SavedCryptoInfo from "../models/SavedCrypto";
 import "./SavedCryptos.css";
 import fetchCryptoData from "../apiclients/crypto.api";
 
 const NUMBER_OF_CRYPTOS_DISPLAYED = 4;
 
 const SavedCryptos: React.FC<{
-  onSelectCrypto: (crypto: SavedCrypto) => void;
-  favCryptos: SavedCrypto[];
+  onSelectCrypto: (crypto: SavedCryptoInfo, isSaved: boolean) => void;
+  favCryptos: SavedCryptoInfo[];
 }> = (props) => {
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
   const cryptoQueries = useQueries({
     queries: props.favCryptos.map((crypto) => ({
@@ -25,13 +25,12 @@ const SavedCryptos: React.FC<{
       ? props.favCryptos
       : props.favCryptos.slice(0, NUMBER_OF_CRYPTOS_DISPLAYED);
   }, [props.favCryptos, showAll]);
-
   return (
     <>
       <h2>Saved Cryptos</h2>
       <div className="saved-cryptos-container">
         <div className="saved-cryptos-list">
-          {visibleCryptos.length > NUMBER_OF_CRYPTOS_DISPLAYED && (
+          {props.favCryptos.length > NUMBER_OF_CRYPTOS_DISPLAYED && (
             <button
               onClick={() => setShowAll(!showAll)}
               className={`show-more-btn-mobile ${
@@ -69,9 +68,9 @@ const SavedCryptos: React.FC<{
                 );
               })}
 
-              {visibleCryptos.length > NUMBER_OF_CRYPTOS_DISPLAYED && (
+              {props.favCryptos.length > NUMBER_OF_CRYPTOS_DISPLAYED && (
                 <button
-                  onClick={() => setShowAll(!showAll)}
+                  onClick={() => setShowAll((prevShowAll) => !prevShowAll)}
                   className="show-more-btn"
                 >
                   {showAll ? "Show Less" : "Show More"}
