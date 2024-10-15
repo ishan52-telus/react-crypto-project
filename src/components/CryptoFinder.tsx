@@ -1,34 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import CryptoCard from "./CryptoCard";
-import CoinGeckoResponse from "../models/CoinGeckoResponse";
 import "./CryptoFinder.css";
-
-type CryptoList = {
-  id: string;
-  symbol: string;
-  name: string;
-};
-
-type CryptoInfo = {
-  id: string;
-  name: string;
-};
-
-const fetchCryptoData = async (id: string) => {
-  const response = await axios.get<CoinGeckoResponse>(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd,eur,gbp&precision=2`
-  );
-  return response.data[id];
-};
-
-const fetchCryptoList = async (): Promise<CryptoList[]> => {
-  const response = await axios.get<CryptoList[]>(
-    `https://api.coingecko.com/api/v3/coins/list`
-  );
-  return response.data;
-};
+import fetchCryptoData from "../apiclients/crypto.api";
+import fetchCryptoList from "../apiclients/cryptolist.api";
+import CryptoList from "../models/CryptoList";
+import CryptoInfo from "../models/CryptoInfo";
 
 const CryptoFinder: React.FC<{
   onSelectCrypto: (crypto: CryptoInfo) => void;
