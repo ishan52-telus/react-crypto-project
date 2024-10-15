@@ -90,9 +90,11 @@ const CryptoFinder: React.FC<{
               key={queryCoin.id}
               coinId={queryCoin.id}
               coinName={queryCoin.name}
-              usd={data.usd}
-              eur={data.eur}
-              gbp={data.gbp}
+              prices={[
+                { currency: "usd", value: data.usd },
+                { currency: "eur", value: data.eur },
+                { currency: "gbp", value: data.gbp },
+              ]}
               isSaved={props.favCryptos.some((c) => c.id === queryCoin.id)}
               onToggleSave={() =>
                 props.onSelectCrypto({ id: queryCoin.id, name: queryCoin.name })

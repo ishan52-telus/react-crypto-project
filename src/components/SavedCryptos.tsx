@@ -57,9 +57,11 @@ const SavedCryptos: React.FC<{
                       key={crypto.id}
                       coinId={crypto.id}
                       coinName={crypto.name}
-                      usd={query.data.usd}
-                      eur={query.data.eur}
-                      gbp={query.data.gbp}
+                      prices={[
+                        { currency: "usd", value: query.data.usd },
+                        { currency: "eur", value: query.data.eur },
+                        { currency: "gbp", value: query.data.gbp },
+                      ]}
                       isSaved={props.favCryptos.some((c) => c.id === crypto.id)}
                       onToggleSave={props.onSelectCrypto}
                     />

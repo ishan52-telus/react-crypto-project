@@ -1,12 +1,15 @@
 import React from "react";
 import "./CryptoCard.css";
 
+type Price = {
+  currency: string;
+  value: number;
+};
+
 type CryptoCardProps = {
   coinId: string;
   coinName: string;
-  usd: number;
-  eur: number;
-  gbp: number;
+  prices: Price[];
   isSaved: boolean;
   onToggleSave: (coin: { id: string; name: string }) => void;
 };
@@ -14,9 +17,7 @@ type CryptoCardProps = {
 const CryptoCard: React.FC<CryptoCardProps> = ({
   coinId,
   coinName,
-  usd,
-  eur,
-  gbp,
+  prices,
   isSaved,
   onToggleSave,
 }) => {
@@ -30,9 +31,11 @@ const CryptoCard: React.FC<CryptoCardProps> = ({
         ></span>
       </div>
       <div className="crypto-card-data">
-        <p> USD: {usd}</p>
-        <p> EUR: {eur}</p>
-        <p> GBP: {gbp}</p>
+        {prices.map((price) => (
+          <p key={price.currency}>
+            {price.currency.toUpperCase()}: {price.value}
+          </p>
+        ))}
       </div>
     </div>
   );
