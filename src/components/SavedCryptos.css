@@ -1,0 +1,29 @@
+.saved-cryptos-container {
+  padding: 20px;
+  width: 100%;
+}
+
+.saved-cryptos-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.show-more-btn-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .saved-cryptos-list {
+    align-items: center;
+  }
+  .btn-visible {
+    display: inline-block;
+  }
+
+  .btn-invisible {
+    display: none;
+  }
+}
